@@ -49,12 +49,14 @@ class Major:
             for ul in ul_tags:
                 self.grad_reqs += ul.get_text(strip=True) + '\n'
     
-    def scrape_course_requirements(self):
+    def scrape_course_requirements(self) -> list:
         formatted_requirements = []
 
         # Parent requirement header
         parent_header = self.soup.find('span', string='Required Courses')
+        # Alternative parent for the div tag
         if not parent_header:
+            # Check if we are dealing with the div case
             return "No requirements found"
 
         parent_list = parent_header.find_next('ul')
@@ -83,73 +85,6 @@ class Major:
 
         return formatted_requirements
 
-                
-    '''
-    def scrape_course_requirements(self) -> None:
-        # div_tags = self.soup.find_all("div", class_=self.course_req_class)
-        
-        # for nested_tags in div_tags:
-        #     ul_tags = nested_tags.find_all("ul")
-        #     for ul in ul_tags:
-        #         self.course_reqs += "PARENT CATEGORY" + '\n'
-        #         li_tags = ul.find_all("li")
-        #         for li in li_tags:
-        #             self.course_reqs += li.get_text(strip=True) + '\n'
-        course_requirements_section = self.soup.find('h3', string='Course Requirements')
-        course_requirements_list = course_requirements_section.find_next('ul')
-        # print(type(course_requirements_list))
-        ##################### FOR TESTING ONLY #######################
-        # testing = [ul.get_text(strip=True)  + '\n' for ul in course_requirements_list.find_all('ul')]
-        # print(testing[0])
-        # for t in testing:
-            # print(t)
-        
-        # We only want the very first child
-        for children in course_requirements_list.descendants:
-            # print(children)
-            li_tag = children.find('li')
-            ul_children = li_tag.find_all('ul')
-            for ul in ul_children:
-                ul_li_children = ul.find_next('li')
-                print(ul_li_children)
-                for li_children in ul_li_children:
-                    print('hi')
-                    # print(li_children)
-            # print(li_tag)
-            break
-            
-
-
-        counter = 0
-        
-        # WORKS IN IDENTIFYING THE TOTAL NUMBER OF CATEGORIES -> DOES NOT WORK FOR CHILDREN CATEGORIES
-        
-        # li_list = course_requirements_list.find_all('li',recursive=True)
-        # for li in li_list:
-        #     text = li.get_text(separator=' ', strip=True)
-        #     nested_ul = li.find('ul')
-        #     if nested_ul:
-        #         print('NESTED UL')
-        #         print(nested_ul.get_text(separator=' ', strip=True))
-        #     if "Complete" in text:
-        #         # print(text)
-        #         counter += 1
-        print(counter)
-                
-        
-        #############################################################
-        # course_req_ul_arr = [ul.get_text(strip=True) for ul in course_requirements_section.find_all('ul')]
-        # for a in course_req_ul_arr:
-        #     print(a)
-        
-        # li_list = course_requirements_list.find_all('li')
-        # course_requirements_arr = [li.get_text(strip=True) for li in li_list]
-        
-        # for c in course_requirements_arr:
-            # self.course_reqs += c + '\n'
-        '''
-        
-
 
     # FOR TESTING ONLY TO BE REMOVED
     def testing(self):
@@ -165,4 +100,63 @@ class Major:
 class CompMath(Major):
     def extract_list_requirements():
         pass
+    def scrape_course_requirements(self) -> list:
+        formatted_requirements = []
+
+        # Parent requirement header
+        parent_header = self.soup.find('span', string='Required Courses')
+        
+        if not parent_header:
+            return "No requirements found"
+            
+
+        parent_list = parent_header.find_next('ul')
+        if not parent_list:
+            return "No requirements list found"
+
+        def extract_items(ul):
+            items = []
+            for li in ul.find_all('li', recursive=False):
+                span = li.find('span')
+                div = li.find('div')
+                if span:
+                    text = span.get_text(strip=True)
+                    if "Complete" in text:
+                        text = "ALL"
+                elif div:
+                    text = div.get_text(strip=True)
+                else:
+                    "No text found"
+
+                # Check if nested list
+                nested_ul = li.find('ul')
+                if nested_ul:
+                    
+                    # Special cases
+                    if nested_ul.get('data-test') == 'ruleView-G':
+                        items.append({
+                        'text': text,
+                        'children': extract_items(nested_ul)
+                        })
+                    elif nested_ul.get('data-test') == 'ruleView-F':
+                        items.append({
+                        'text': text,
+                        'children': extract_items(nested_ul)
+                        })
+                    # General case
+                    else:
+                        items.append({
+                        'text': text,
+                        'children': extract_items(nested_ul)
+                        })    
+                else:
+                    items.append({'text': text})
+
+            return items
+
+        formatted_requirements = extract_items(parent_list)
+
+        return formatted_requirements
+        
+        
     
