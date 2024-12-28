@@ -9,6 +9,7 @@ class Major:
     soup = ""
     grad_reqs = ""
     course_reqs = ""
+    formatted_requirements = []
     # Passing in the URL to scrape as well as the fp for the html file
     def __init__(self, url: str, html_out_fp: str, grad_req_class: str, course_req_class: str) -> None:
         print('Init done')
@@ -50,7 +51,6 @@ class Major:
                 self.grad_reqs += ul.get_text(strip=True) + '\n'
     
     def scrape_course_requirements(self) -> list:
-        formatted_requirements = []
 
         # Parent requirement header
         parent_header = self.soup.find('span', string='Required Courses')
@@ -81,9 +81,7 @@ class Major:
 
             return items
 
-        formatted_requirements = extract_items(parent_list)
-
-        return formatted_requirements
+        self.formatted_requirements = extract_items(parent_list)
 
 
     # FOR TESTING ONLY TO BE REMOVED
@@ -94,14 +92,68 @@ class Major:
         with open("testing_course.txt", "w") as f2:
             f2.write(self.course_reqs)
         with open("testing_categories.txt", "w") as f3:
-            f3.write(json.dumps(self.scrape_course_requirements(), indent=2))
+            f3.write(json.dumps(self.formatted_requirements, indent=2))
 
 
 class CompMath(Major):
-    def extract_list_requirements():
+    def extract_list_requirements(self):
+        '''
+                # Parent requirement header
+        parent_header = self.soup.find('section', string='List 1')
+        
+        if not parent_header:
+            return "No requirements found"
+            
+
+        parent_list = parent_header.find_next('ul')
+        if not parent_list:
+            return "No requirements list found"
+
+        def extract_items(ul):
+            items = []
+            for li in ul.find_all('li', recursive=False):
+                span = li.find('span')
+                div = li.find('div')
+                if span:
+                    text = span.get_text(strip=True)
+                    if "Complete" in text:
+                        text = "ALL"
+                elif div:
+                    text = div.get_text(strip=True)
+                else:
+                    "No text found"
+
+                # Check if nested list
+                nested_ul = li.find('ul')
+                if nested_ul:
+                    
+                    # Special cases
+                    if nested_ul.get('data-test') == 'ruleView-G':
+                        items.append({
+                        'text': text,
+                        'children': extract_items(nested_ul)
+                        })
+                    elif nested_ul.get('data-test') == 'ruleView-F':
+                        items.append({
+                        'text': text,
+                        'children': extract_items(nested_ul)
+                        })
+                    # General case
+                    else:
+                        items.append({
+                        'text': text,
+                        'children': extract_items(nested_ul)
+                        })    
+                else:
+                    items.append({'text': text})
+
+            return items
+
+        self.formatted_requirements = extract_items(parent_list)
+        '''
         pass
+        
     def scrape_course_requirements(self) -> list:
-        formatted_requirements = []
 
         # Parent requirement header
         parent_header = self.soup.find('span', string='Required Courses')
@@ -154,9 +206,8 @@ class CompMath(Major):
 
             return items
 
-        formatted_requirements = extract_items(parent_list)
+        self.formatted_requirements = extract_items(parent_list)
 
-        return formatted_requirements
         
         
     
