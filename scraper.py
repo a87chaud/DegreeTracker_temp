@@ -97,18 +97,18 @@ class Major:
 
 class CompMath(Major):
     def extract_list_requirements(self):
-        '''
-                # Parent requirement header
-        parent_header = self.soup.find('section', string='List 1')
+        # Parent requirement header
+        parent_header = self.soup.find('div', string='List 1')
         
         if not parent_header:
-            return "No requirements found"
+            print("No requirements found")
+            return
             
 
         parent_list = parent_header.find_next('ul')
         if not parent_list:
-            return "No requirements list found"
-
+            print("No requirements list found")
+            return
         def extract_items(ul):
             items = []
             for li in ul.find_all('li', recursive=False):
@@ -149,10 +149,8 @@ class CompMath(Major):
 
             return items
 
-        self.formatted_requirements = extract_items(parent_list)
-        '''
-        pass
-        
+        self.formatted_requirements += extract_items(parent_list)
+
     def scrape_course_requirements(self) -> list:
 
         # Parent requirement header
@@ -206,7 +204,7 @@ class CompMath(Major):
 
             return items
 
-        self.formatted_requirements = extract_items(parent_list)
+        self.formatted_requirements += extract_items(parent_list)
 
         
         
