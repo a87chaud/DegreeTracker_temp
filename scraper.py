@@ -119,36 +119,39 @@ class CompMath(Major):
                     span = li.find('span')
                     div = li.find('div')
                     if span:
-                        text = span.get_text(strip=True)
-                        text_check = text.replace(" ", "")
+                        text_span = span.get_text(strip=True)
+                        text_span_check = text_span.replace(" ", "")
                         ############# BUG FIXING ###############
+                        # print('Text in span(list req): ' + text)
                         ########################################
-                        if "Completeall" in text_check:
+                        if "Completeall" in text_span_check:
                             text = "all"
-                        elif "Chooseany" in text_check:
+                        elif "Chooseany" in text_span_check:
                             text = "any"
-                        elif "Complete1" in text_check:
+                        elif "Complete1" in text_span_check:
                             text = "1"
-                        elif "Complete2" in text_check:
+                        elif "Complete2" in text_span_check:
                             text = "2"
                         else:
-                            print('Text in span(list req): ' + text)
+                            text = text_span
+                            # print('Text in span(list req): ' + text)
                             
-                    elif div:
-                        text = div.get_text(strip=True)
-                        text_check = text.replace(" ", "")
+                    if div:
+                        text_div = div.get_text(strip=True)
+                        text_div_check = text_div.replace(" ", "")
                         ############# BUG FIXING ###############
+                        # print('Text in div(list req): ' + text)
                         ########################################
-                        if "Completeall" in text_check:
+                        if "Completeall" in text_div_check:
                             text = "all"
-                        elif "Chooseany" in text_check:
+                        elif "Chooseany" in text_div_check:
                             text = "any"
-                        elif "Complete1" in text_check:
+                        elif "Complete1" or "Completeone" in text_div_check:
                             text = "1"
-                        elif "Complete2" in text_check:
+                        elif "Complete2" in text_div_check:
                             text = "2"
                         else:
-                            print('Text in div(list req): ' + text)
+                            text = text_div
                             
                     else:
                         "No text found"
