@@ -98,58 +98,88 @@ class Major:
 class CompMath(Major):
     def extract_list_requirements(self):
         # Parent requirement header
-        parent_header = self.soup.find('div', string='List 1')
-        
-        if not parent_header:
-            print("No requirements found")
-            return
-            
+        parent_header_arr = [self.soup.find('div', string='List 1'), self.soup.find('div', string='List 2'), self.soup.find('div', string='List 3')]
+        counter = 1
+        for parent_header in parent_header_arr:
+            print(f'List {counter}')
+            print('#########################')
+            counter += 1
+            if not parent_header:
+                print("No requirements found")
+                return
+                
 
-        parent_list = parent_header.find_next('ul')
-        if not parent_list:
-            print("No requirements list found")
-            return
-        def extract_items(ul):
-            items = []
-            for li in ul.find_all('li', recursive=False):
-                span = li.find('span')
-                div = li.find('div')
-                if span:
-                    text = span.get_text(strip=True)
-                    if "Complete" in text:
-                        text = "ALL"
-                elif div:
-                    text = div.get_text(strip=True)
-                else:
-                    "No text found"
-
-                # Check if nested list
-                nested_ul = li.find('ul')
-                if nested_ul:
-                    
-                    # Special cases
-                    if nested_ul.get('data-test') == 'ruleView-G':
-                        items.append({
-                        'text': text,
-                        'children': extract_items(nested_ul)
-                        })
-                    elif nested_ul.get('data-test') == 'ruleView-F':
-                        items.append({
-                        'text': text,
-                        'children': extract_items(nested_ul)
-                        })
-                    # General case
+            parent_list = parent_header.find_next('ul')
+            if not parent_list:
+                print("No requirements list found")
+                return
+            def extract_items(ul):
+                items = []
+                for li in ul.find_all('li', recursive=False):
+                    span = li.find('span')
+                    div = li.find('div')
+                    if span:
+                        text = span.get_text(strip=True)
+                        text_check = text.replace(" ", "")
+                        ############# BUG FIXING ###############
+                        ########################################
+                        if "Completeall" in text_check:
+                            text = "all"
+                        elif "Chooseany" in text_check:
+                            text = "any"
+                        elif "Complete1" in text_check:
+                            text = "1"
+                        elif "Complete2" in text_check:
+                            text = "2"
+                        else:
+                            print('Text in span(list req): ' + text)
+                            
+                    elif div:
+                        text = div.get_text(strip=True)
+                        text_check = text.replace(" ", "")
+                        ############# BUG FIXING ###############
+                        ########################################
+                        if "Completeall" in text_check:
+                            text = "all"
+                        elif "Chooseany" in text_check:
+                            text = "any"
+                        elif "Complete1" in text_check:
+                            text = "1"
+                        elif "Complete2" in text_check:
+                            text = "2"
+                        else:
+                            print('Text in div(list req): ' + text)
+                            
                     else:
-                        items.append({
-                        'text': text,
-                        'children': extract_items(nested_ul)
-                        })    
-                else:
-                    items.append({'text': text})
+                        "No text found"
 
-            return items
+                    # Check if nested list
+                    nested_ul = li.find('ul')
+                    if nested_ul:
+                        
+                        # Special cases
+                        if nested_ul.get('data-test') == 'ruleView-G':
+                            items.append({
+                            'text': text,
+                            'children': extract_items(nested_ul)
+                            })
+                        elif nested_ul.get('data-test') == 'ruleView-F':
+                            items.append({
+                            'text': text,
+                            'children': extract_items(nested_ul)
+                            })
+                        # General case
+                        else:
+                            items.append({
+                            'text': text,
+                            'children': extract_items(nested_ul)
+                            })    
+                    else:
+                        items.append({'text': text})
 
-        self.formatted_requirements += extract_items(parent_list)
+                return items
+
+            self.formatted_requirements += extract_items(parent_list)
 
     def scrape_course_requirements(self) -> list:
 
@@ -171,10 +201,22 @@ class CompMath(Major):
                 div = li.find('div')
                 if span:
                     text = span.get_text(strip=True)
-                    if "Complete" in text:
-                        text = "ALL"
-                elif div:
-                    text = div.get_text(strip=True)
+                    ############# BUG FIXING ###############
+                    # print('Text in span: ' + text)
+                    ########################################
+                    if "Complete all" in text:
+                        text = "all"
+                if div:
+                    text = div.get_text(strip=True)    
+                    ############# BUG FIXING ###############
+                    # print('Text in div: ' + text)
+                    ########################################                
+                    if "Complete all" in text:
+                        text = "all"
+                    elif "Complete1" in text:
+                        text = "1"
+                    elif "Complete2" in text:
+                        text = "2"
                 else:
                     "No text found"
 
