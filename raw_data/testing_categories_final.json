@@ -1,0 +1,281 @@
+[
+  {
+    "requirement_num": "requirement_1",
+    "tag": "ALL",
+    "children": [
+      {
+        "requirement_num": "requirement_2",
+        "tag": "ALL",
+        "children": [
+          {
+            "text": "CS230- Introduction to Computers and Computer Systems(0.50)"
+          },
+          {
+            "text": "CS234- Data Types and Structures(0.50)"
+          }
+        ]
+      },
+      {
+        "requirement_num": "requirement_3",
+        "tag": "ONE",
+        "children": [
+          {
+            "text": "AMATH242- Introduction to Computational Mathematics(0.50)"
+          },
+          {
+            "text": "CS371- Introduction to Computational Mathematics(0.50)"
+          }
+        ]
+      },
+      {
+        "requirement_num": "requirement_4",
+        "tag": "ONE",
+        "children": [
+          {
+            "text": "MATH237- Calculus 3 for Honours Mathematics(0.50)"
+          },
+          {
+            "text": "MATH247- Calculus 3 (Advanced Level)(0.50)"
+          }
+        ]
+      },
+      {
+        "requirement_num": "requirement_5",
+        "tag": "ONE",
+        "children": [
+          {
+            "text": "MATH239- Introduction to Combinatorics(0.50)"
+          },
+          {
+            "text": "MATH249- Introduction to Combinatorics (Advanced Level)(0.50)"
+          }
+        ]
+      },
+      {
+        "text": "Complete 3 non-math courses, at least one of which is at the 200-, 300-, or 400-level, all from the same subject code, from the following choices: AE, BIOL, BME, CHE, CHEM, CIVE, EARTH, ECE, ECON, ENVE, GEOE, ME, MNS, MSE, MTE, NE, PHYS, SYDE"
+      },
+      {
+        "text": "Complete the List 1 and List 2 requirements below"
+      },
+      {
+        "text": "Complete 4 additional courses, taken from List 2 or List 3; choices must be in at least two different subject codes (AMATH, CO, CS, PMATH, STAT), and 2 courses must be at the 400-level"
+      }
+    ]
+  },
+  {
+    "requirement_num": "requirement_6",
+    "tag": "TWO",
+    "children": [
+      {
+        "requirement_num": "requirement_7",
+        "tag": "ONE",
+        "children": [
+          {
+            "text": "AMATH250- Introduction to Differential Equations(0.50)"
+          },
+          {
+            "text": "AMATH251- Introduction to Differential Equations (Advanced Level)(0.50)"
+          },
+          {
+            "text": "AMATH350- Differential Equations for Business and Economics(0.50)"
+          }
+        ]
+      },
+      {
+        "requirement_num": "requirement_8",
+        "tag": "ONE",
+        "children": [
+          {
+            "text": "CO250- Introduction to Optimization(0.50)"
+          },
+          {
+            "text": "CO255- Introduction to Optimization (Advanced Level)(0.50)"
+          }
+        ]
+      },
+      {
+        "requirement_num": "requirement_9",
+        "tag": "ONE",
+        "children": [
+          {
+            "text": "CS245- Logic and Computation(0.50)"
+          },
+          {
+            "text": "CS245E- Logic and Computation (Enriched)(0.50)"
+          },
+          {
+            "text": "PMATH330- Introduction to Mathematical Logic(0.50)"
+          },
+          {
+            "text": "PMATH432- Mathematical Logic(0.50)"
+          }
+        ]
+      },
+      {
+        "requirement_num": "requirement_10",
+        "tag": "ONE",
+        "children": [
+          {
+            "text": "CS246- Object-Oriented Software Development(0.50)"
+          },
+          {
+            "text": "CS246E- Object-Oriented Software Development (Enriched)(0.50)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "requirement_num": "requirement_11",
+    "tag": "TWO",
+    "children": [
+      {
+        "requirement_num": "requirement_12",
+        "tag": "ANY",
+        "children": [
+          {
+            "text": "AMATH342- Computational Methods for Differential Equations(0.50)"
+          },
+          {
+            "text": "CS475- Computational Linear Algebra(0.50)"
+          },
+          {
+            "text": "PMATH370- Chaos and Fractals(0.50)"
+          }
+        ]
+      },
+      {
+        "requirement_num": "requirement_13",
+        "tag": "MAX_ONE",
+        "children": [
+          {
+            "text": "CO353- Computational Discrete Optimization(0.50)"
+          },
+          {
+            "text": "CO367- Nonlinear Optimization(0.50)"
+          }
+        ]
+      },
+      {
+        "requirement_num": "requirement_14",
+        "tag": "MAX_ONE",
+        "children": [
+          {
+            "text": "STAT340- Stochastic Simulation Methods(0.50)"
+          },
+          {
+            "text": "STAT341- Computational Statistics and Data Analysis(0.50)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "requirement_num": "requirement_15",
+    "tag": "ANY",
+    "children": [
+      {
+        "text": "AMATH343- Discrete Models in Applied Mathematics(0.50)"
+      },
+      {
+        "text": "AMATH382- Computational Modelling of Cellular Systems(0.50)"
+      },
+      {
+        "text": "AMATH383- Introduction to Mathematical Biology(0.50)"
+      },
+      {
+        "text": "AMATH391- From Fourier to Wavelets(0.50)"
+      },
+      {
+        "text": "AMATH442- Computational Methods for Partial Differential Equations(0.50)"
+      },
+      {
+        "text": "AMATH455- Control Theory(0.50)"
+      },
+      {
+        "text": "AMATH477- Stochastic Processes for Applied Mathematics(0.50)"
+      },
+      {
+        "text": "BIOL382- Computational Modelling of Cellular Systems(0.50)"
+      },
+      {
+        "text": "CO351- Network Flow Theory(0.50)"
+      },
+      {
+        "text": "CO370- Deterministic OR Models(0.50)"
+      },
+      {
+        "text": "CO372- Portfolio Optimization Models(0.50)"
+      },
+      {
+        "text": "CO450- Combinatorial Optimization(0.50)"
+      },
+      {
+        "text": "CO452- Integer Programming(0.50)"
+      },
+      {
+        "text": "CO454- Scheduling(0.50)"
+      },
+      {
+        "text": "CO456- Introduction to Game Theory(0.50)"
+      },
+      {
+        "text": "CO463- Convex Optimization and Analysis(0.50)"
+      },
+      {
+        "text": "CO466- Continuous Optimization(0.50)"
+      },
+      {
+        "text": "CO471- Semidefinite Optimization(0.50)"
+      },
+      {
+        "text": "CO485- The Mathematics of Public-Key Cryptography(0.50)"
+      },
+      {
+        "text": "CO487- Applied Cryptography(0.50)"
+      },
+      {
+        "text": "CS341- Algorithms(0.50)"
+      },
+      {
+        "text": "CS431- Data-Intensive Distributed Analytics(0.50)"
+      },
+      {
+        "text": "CS451- Data-Intensive Distributed Computing(0.50)"
+      },
+      {
+        "text": "CS466- Algorithm Design and Analysis(0.50)"
+      },
+      {
+        "text": "CS476- Numeric Computation for Financial Modeling(0.50)"
+      },
+      {
+        "text": "CS479- Neural Networks(0.50)"
+      },
+      {
+        "text": "CS480- Introduction to Machine Learning(0.50)"
+      },
+      {
+        "text": "CS482- Computational Techniques in Biological Sequence Analysis(0.50)"
+      },
+      {
+        "text": "CS485- Statistical and Computational Foundations of Machine Learning(0.50)"
+      },
+      {
+        "text": "CS487- Introduction to Symbolic Computation(0.50)"
+      },
+      {
+        "text": "STAT440- Computational Inference(0.50)"
+      },
+      {
+        "text": "STAT441- Statistical Learning - Classification(0.50)"
+      },
+      {
+        "text": "STAT442- Data Visualization(0.50)"
+      },
+      {
+        "text": "STAT444- Statistical Learning - Advanced Regression(0.50)"
+      }
+    ]
+  }
+]
